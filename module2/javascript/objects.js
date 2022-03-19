@@ -10,4 +10,8 @@ let spooderman = {
         console.log('Cap is saying hello')
     }
 };
-console.log(spooderman);
+
+//2 ways to access elements 
+
+console.log(spooderman.name);
+console.log(spooderman['name']);
