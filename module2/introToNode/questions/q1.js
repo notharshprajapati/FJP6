@@ -4,11 +4,11 @@
 let fs = require("fs");
 let path = require("path");
 
-// if(!fs.existsSync("folder"))
-// {
-//     fs.mkdirSync("folder");
-// }
+if(!fs.existsSync("folder"))
+{
+    fs.mkdirSync("folder");
+}
 
 let newDir = path.join(__dirname,"folder","text.txt");
 console.log(newDir)
-fs.writeFileSync(newDir,"lorem ipsum");
+fs.writeFileSync(newDir,"");
