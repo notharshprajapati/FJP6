@@ -151,8 +151,17 @@ public class Main {
         LinkedList mergeTwoSortedLists(LinkedList l1, LinkedList l2) {
             LinkedList res = new LinkedList();
 
-            
-
+            Node one = l1.head;
+            Node two = l2.head;
+            while (one.next != null && two.next != null) {
+                if (one.next.data < two.next.data) {
+                    res.addLast(one.data);
+                    one = one.next;
+                } else {
+                    res.addLast(two.data);
+                    two = two.next;
+                }
+            }
             return res;
         }
     }
