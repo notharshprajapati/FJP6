@@ -1,199 +1,143 @@
 module.exports = {
-    answers: [`
-    #include <bits/stdc++.h>
-            using namespace std;
+  answers: [
+    `
+    class Solution {
+        public:
+        vector<int> twoSum(vector<int>& nums, int target) {
+            unordered_map<int, int> imap;
             
-            int main(){
-                int number_of_elements;
-                cin >> number_of_elements;
-                vector <int> array(number_of_elements);
-                int sum_of_array = 0;
+            for (int i = 0;; ++i) {
+                auto it = imap.find(target - nums[i]);
                 
-                for(int i = 0; i < number_of_elements; i++){
-                   cin >> array[i];
-                   sum_of_array += array[i];
+                if (it != imap.end()) 
+                    return vector<int> {i, it->second};
+                    
+                imap[nums[i]] = i;
+            }
+        }
+        };
+    `,
+    `class Solution {
+        public:
+            ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+                ListNode *dummy = new ListNode(0);
+                ListNode *curr = dummy;
+                int carry = 0;
+                
+                while(l1 != NULL || l2 != NULL || carry == 1){
+                    int sum = 0;
+                    if(l1 != NULL){
+                        sum += l1->val;
+                        l1 = l1->next;
+                    }
+                    if(l2 != NULL){
+                        sum += l2->val;
+                        l2 = l2->next;
+                    }
+                    sum += carry;
+                    carry = sum/10;
+                    ListNode *node = new ListNode(sum % 10);
+                    curr->next = node;
+                    curr = curr->next;
                 }
-                
-                cout << sum_of_array;
-                return 0;
+                return dummy->next;
             }
-    `, `#include <bits/stdc++.h>
-    using namespace std;
-    int N;
-    int A[100];
-    int main()
-    {
-        for(int i=0; i<3; i++)
-            scanf("%d", A+i);
-        int a, b=0, c=0;
-        for(int i=0; i<3; i++)
-        {
-            scanf("%d", &a);
-            if(a>A[i])
-                c++;
-            else if(a<A[i])
-                b++;
-        }
-        printf("%d %d\n", b, c);
-        return 0;
-    }> 
-    `, `#include <cmath>
-    #include <cstdio>
-    #include <vector>
-    #include <iostream>
-    #include <algorithm>
-    using namespace std;
-    int main() {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
-        long long sum=0;
-        int n;
-        cin>>n;
-        int data;
-        for(int i=0;i<n;i++) {
-            cin>>data;
-            sum+=data;
-        }
-        cout<<sum<<endl;
-        return 0;
-    }
-    `, `
-    #include <iostream>
-    using namespace std;
-    int main() {
-        int n;
-        cin >> n;
-        int arr[n][n];
-        long long int d1=0; //First Diagonal
-        long long int d2=0; //Second Diagonal
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                cin >> arr[i][j];
-                if (i == j) d1 += arr[i][j];
-                if (i == n - j - 1) d2 += arr[i][j];
+        };
+    `,
+    `
+    class Solution {
+        public:
+            int lengthOfLongestSubstring(string s) {
+                int store[256]={0}; 
+                int l=0;  
+                int r=0;   
+                int ans=0;  
+                while(r<s.length())
+                {
+                    store[s[r]]++;
+                    
+                    while(store[s[r]]>1) 
+                    { 
+                        store[s[l]]--;   
+                        l++;     
+                    }
+                    ans = max(ans,r-l+1);   
+                    r++;      
+                }
+                return ans;
             }
-        }
-        cout << abs(d1 - d2) << endl; //Absolute difference of the sums across the diagonals
-        return 0;
-    }
-    `, `#include <cmath>
-    #include <cstdio>
-    #include <vector>
-    #include <iostream>
-    #include <algorithm>
-    using namespace std;
-    int main() {
-        int p=0,n=0,z=0,a,i,j;
-        cin>>j;
-        for(i=0;i<j;i++){
-            cin>>a;
+        };
+    `,
+    `class Solution {
+        public:
+            double mediann(vector<int>&a,vector<int>&b){
+                int m=a.size();
+                int n=b.size();
+                if(m>n)
+                    return mediann(b,a);
+                int l=0,r=m;
+                while(l<=r){
+                    int partx=l+(r-l)/2;
+                    int party=(m+n+1)/2-partx;
+                    int maxlx=(partx==0)?INT_MIN:a[partx-1];
+                    int minrx=(partx==m)?INT_MAX:a[partx];
+                    int maxly=(party==0)?INT_MIN:b[party-1];
+                    int minry=(party==n)?INT_MAX:b[party];
+                    if(maxlx<=minry&&maxly<=minrx){
+                        if((m+n)%2==0)
+                            return (double)(max(maxlx,maxly)+min(minrx,minry))/2;
+                        else
+                            return (double)(max(maxlx,maxly));
+                    }else if(maxlx>minry)
+                        r=partx-1;
+                    else
+                        l=partx+1;
+                }
+                return -1.0;
+            }
+            double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+                double ans;
+                ans=mediann(nums1,nums2);
+                return ans;   
+            }
+        };
+    `,
+    `class Solution {
+        public:
+             string longestPalindrome(string s) 
+        {   
+            int len = s.size();
+            int dp[len][len];
+            memset(dp,0,sizeof(dp));
+            int end=1;
+            int start=0;
             
-            if(a>0)
-                p++;
-            else if(a<0)
-                n++;
-            else
-                z++;
-        }
-        
-        printf("%.3f\n",(float)p/j);
-        printf("%.3f\n",(float)n/j);
-        printf("%.3f",(float)z/j);
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
-        return 0;
-    }
-    `, `#include <cmath>
-    #include <cstdio>
-    #include <vector>
-    #include <iostream>
-    #include <algorithm>
-    using namespace std;
-    int main() {
-        
-        int n,i,j,k;
-        cin>>n;
-        for(i=1;i<=n;i++)
-        {
-            for(j=1;j<=n-i;j++)
+            for(int i=0;i<len;i++)
             {
-                cout<<" ";    
+                dp[i][i] = 1;
             }
-            for(k=j;k<=n;k++)
+            for(int i=0;i<len-1;i++)
             {
-                cout<<"#";    
+                if(s[i]==s[i+1])
+                { dp[i][i+1]=1;start=i;end=2;}
             }
-            cout<<"\n";
+            
+            for(int j=2;j<len;j++)
+            {
+                for(int i=0;i< len-j;i++)
+                {  
+                    int left=i; //start point
+                    int right = i+j;  //ending point
+                    
+                    if(dp[left+1][right-1]==1 && s[left]==s[right]) 
+                    {
+                        dp[left][right]=1; start=i; end=j+1; 
+                    }        
+                }
+            }
+           return s.substr(start, end);
         }
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
-        return 0;
-    } 
-    `, `#include <bits/stdc++.h>
-    typedef long long LL;
-    using namespace std;
-    int main(){
-        LL s[5];
-        LL d = 0;
-        for(int i = 0; i < 5; i++){
-            cin >> s[i];
-            d += s[i];
-        }
-        sort(s,s+5);
-        cout << d-s[4] << " " << d-s[0] << endl;
-    }
-    `, `#include<bits/stdc++.h>
-    using namespace std;
-    typedef long long ll;
-    typedef vector<int> vi;
-    typedef pair<int,int> pii;
-    typedef pair<ll,ll> pll;
-    typedef vector<pii> vpii;
-    typedef unsigned long long llu;
-    #define author ayushtomar
-    #define rf freopen("in.txt", "r", stdin)
-    #define wf freopen("out.txt", "w", stdout)
-    #define debug(x) cerr<<#x<<" "<<x<<endl;
-    #define f first
-    #define s second
-    #define mp make_pair
-    #define pb push_back
-    map < int ,int > ma;
-    int main()
-    {
-        int n;
-        cin>>n;
-        int ans=-1;
-        for(int i=0;i<n;i++) {
-                int x;
-            cin>>x;
-            ma[x]++;
-            ans=max(ans,x);
-        }
-        cout<<ma[ans];
-    return 0;
-    }
-    `, `#include <cmath>
-    #include <cstdio>
-    #include <vector>
-    #include <iostream>
-    #include <algorithm>
-    using namespace std;
-    int main() {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
-        string s;
-        string h;
-        int hr;
-        cin>>s;
-        hr = ((s[0]-'0')*10)+(s[1]-'0');
-        if(s[8]=='P'&&s[9]=='M'&& hr ==12) cout<<to_string(hr);
-        else if(s[8]=='P'&&s[9]=='M') cout<<to_string(hr+12);
-        else if(s[8]=='A'&&s[9]=='M'&&hr==12) cout<<"00";
-        
-        else cout<< s[0]<<s[1];
-        
-       
-        for(int i =2;i<8;i++)
-            cout<<s[i];
-        cout<<endl;
-        return 0;
-    }
-    `]
-}
+        };
+    `,
+  ],
+};

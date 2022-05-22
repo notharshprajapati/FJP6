@@ -100,7 +100,21 @@
     </div>
     <script>
       // Q Make the filter work
-      
+      let all = document.querySelector("select");
+      all.addEventListener("change", function (e) {
+        let div = document.querySelectorAll("div");
+        for (let i = 0; i < div.length; i++) {
+          let list = div[i].querySelector("p");
+          if (
+            list.getAttribute("data-category") == e.target.value ||
+            e.target.value == "none"
+          ) {
+            list.parentElement.style.display = "block";
+          } else {
+            list.parentElement.style.display = "none";
+          }
+        }
+      });
     </script>
   </body>
 </html>

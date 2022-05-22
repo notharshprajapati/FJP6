@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
-const mail = "gavic76183@carsik.com";
-const pass = "abcdef";
+const user = "SussyOnniMan";
+const pass = "F6kBdgAwSUvxRwG";
 const code = require("./code");
 
 let browserPromise = puppeteer.launch({
@@ -18,75 +18,75 @@ browserPromise
   .then(function (pageInstance) {
     console.log("Page is opened");
     page = pageInstance;
-    let urlPromise = page.goto("https://www.hackerrank.com/");
+    let urlPromise = page.goto("https:leetcode.com/");
     return urlPromise;
   })
   .then(function () {
-    return waitAndClick("ul.menu a");
-  })
-  .then(function () {
-    let waitPromise = page.waitForSelector(
-      ".fl-module-content.fl-node-content .fl-button"
-    );
-    return waitPromise;
-  })
-  .then(function () {
-    let domClickPromse = page.evaluate(function () {
-      let btns = document.querySelectorAll(
-        ".fl-module-content.fl-node-content .fl-button"
-      );
-      btns[1].click();
+    let signInPromise = page.evaluate(function () {
+      let navBar = document.querySelector(".nav-right");
+      let navBarButtons = navBar.querySelectorAll("a");
+      navBarButtons[navBarButtons.length - 1].click();
       return;
     });
-    return domClickPromse;
+    return signInPromise;
   })
   .then(function () {
-    let waitPromise = page.waitForSelector("#input-1");
+    let waitPromise = page.waitForSelector("#id_login");
     return waitPromise;
   })
   .then(function () {
-    let mailTypedPromise = page.type("#input-1", mail, { delay: 100 });
-    return mailTypedPromise;
+    let wait = page.waitForTimeout(4000);
+    return wait;
   })
   .then(function () {
-    let passTypedPromise = page.type("#input-2", pass, { delay: 100 });
+    let userTypedPromise = page.type("#id_login", user, { delay: 250 });
+    return userTypedPromise;
+  })
+  .then(function () {
+    let passTypedPromise = page.type("#id_password", pass, { delay: 250 });
     return passTypedPromise;
   })
   .then(function () {
-    let clickPromse = page.click('button[data-analytics="LoginPassword"]');
+    let wait = page.waitForTimeout(4000);
+    return wait;
+  })
+  .then(function () {
+    let clickPromse = page.click("#signin_btn");
     return clickPromse;
   })
+
   .then(function () {
-    return waitAndClick('[data-automation="algorithms"]');
+    let waitPromise = page.waitForSelector('[class="nav-item__5BvG"]');
+    return waitPromise;
   })
   .then(function () {
-    return page.waitForSelector(".filter-group");
+    let wait = page.waitForTimeout(4000);
+
+    return wait;
   })
   .then(function () {
-    let domSelectPromise = page.evaluate(function () {
-      let allDivs = document.querySelectorAll(".filter-group");
-      let div = allDivs[3];
-      let clickSelector = div.querySelector(".ui-checklist-list-item input");
-      clickSelector.click();
+    let problemsPage = page.evaluate(function () {
+      let navBarButtons = document.querySelectorAll('[class="nav-item__5BvG"]');
+      navBarButtons[2].click();
       return;
     });
-    return domSelectPromise;
+    return problemsPage;
   })
   .then(function () {
-    console.log("warmup Selected");
-    return page.waitForSelector(
-      ".challenges-list .js-track-click.challenge-list-item"
+    let waitPromise = page.waitForSelector(
+      '[class="h-5 hover:text-primary-s dark:hover:text-dark-primary-s"]'
     );
+    return waitPromise;
   })
+
   .then(function () {
     let arrPromise = page.evaluate(function () {
       let arr = [];
       let aTags = document.querySelectorAll(
-        ".challenges-list .js-track-click.challenge-list-item"
+        '[class="h-5 hover:text-primary-s dark:hover:text-dark-primary-s"]'
       );
-      for (let i = 0; i < aTags.length; i++) {
+      for (let i = 0; i < 5; i++) {
         let link = aTags[i].href;
-        console.log(link);
         arr.push(link);
       }
       return arr;
@@ -131,13 +131,38 @@ function questionSolver(question, answer) {
     let linkPromise = page.goto(question);
     linkPromise
       .then(function () {
-        return waitAndClick(".checkBoxWrapper input");
+        let wait = page.waitForTimeout(4000);
+        return wait;
       })
       .then(function () {
-        return waitAndClick(".ui-tooltip-wrapper textarea");
+        return waitAndClick(".custom-testcase__2ah7");
       })
       .then(function () {
-        let typePromise = page.type(".ui-tooltip-wrapper textarea", answer);
+        return waitAndClick(".editor-container__QkHu");
+      })
+
+      .then(function () {
+        let holdControl = page.keyboard.down("Control");
+        return holdControl;
+      })
+      .then(function () {
+        let pressA = page.keyboard.press("A");
+        return pressA;
+      })
+      .then(function () {
+        let upControl = page.keyboard.up("Control");
+        return upControl;
+      })
+
+      .then(function () {
+        let pressSpace = page.keyboard.press(" ");
+        return pressSpace;
+      })
+
+      .then(function () {
+        let typePromise = page.type(".editor-container__QkHu", answer, {
+          delay: 1,
+        });
         return typePromise;
       })
       .then(function () {
@@ -153,11 +178,19 @@ function questionSolver(question, answer) {
         return pressX;
       })
       .then(function () {
+        let pressA = page.keyboard.press("A");
+        return pressA;
+      })
+      .then(function () {
+        let pressA = page.keyboard.press(" ");
+        return pressA;
+      })
+      .then(function () {
         let upControl = page.keyboard.up("Control");
         return upControl;
       })
       .then(function () {
-        return waitAndClick(".monaco-editor.no-user-select.vs");
+        return waitAndClick(".CodeMirror-lines");
       })
       .then(function () {
         let holdControl = page.keyboard.down("Control");
@@ -176,9 +209,7 @@ function questionSolver(question, answer) {
         return upControl;
       })
       .then(function () {
-        return waitAndClick(
-          ".ui-btn.ui-btn-normal.ui-btn-primary.pull-right.hr-monaco-submit.ui-btn-styled"
-        );
+        return waitAndClick(".submit__2ISl.css-ieo3pr");
       })
       .then(function () {
         console.log("questions submitted success");

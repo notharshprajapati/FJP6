@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #afa5c7;
+}
+
+.toolbox-cont {
+  height: 5rem;
+  background-color: #141e27;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  top: 0px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.toolbox-priority-cont {
+  height: 3rem;
+  background-color: #eeedde;
+  width: 18rem;
+  margin-left: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 16px;
+}
+
+.action-btn-cont {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background-color: #eeedde;
+  height: 3rem;
+  width: 10rem;
+  margin-left: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 16px;
+}
+
+.color {
+  height: 1.5rem;
+  width: 3rem;
+  border-radius: 4px;
+}
+
+.lightpink {
+  background-color: lightpink;
+}
+
+.blue {
+  background-color: lightblue;
+}
+
+.green {
+  background-color: lightgreen;
+}
+.black {
+  background-color: black;
+}
+
+.add-btn {
+  font-size: 1.5rem;
+}
+
+.remove-btn {
+  font-size: 1.5rem;
+}
+
+.modal-cont {
+  position: absolute;
+  left: 25vw;
+  top: 25vh;
+  /* From https://css.glass */
+  background: rgba(135, 135, 135, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  height: 50vh;
+  width: 50vw;
+  display: none;
+}
+
+.textarea-cont {
+  outline: none;
+  resize: none;
+  border: none;
+  /* From https://css.glass */
+  background: rgba(135, 135, 135, 0);
+  border-radius: 16px 0px 0px 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  height: 100%;
+  width: 75%;
+  font-size: 2rem;
+  padding: 2rem;
+  border-right: 2px solid #141e27;
+}
+
+.priority-color-cont {
+  height: 100%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.priority-color {
+  height: 3rem;
+  width: 5rem;
+}
+
+.active {
+  border: 5px solid #e0ddaa;
+}
+
+.main-cont {
+  margin-top: 7rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ticket-cont {
+  background-color: #eeedde;
+  height: 10rem;
+  width: 16rem;
+}
+
+.ticket-color {
+  height: 1rem;
+}
+
+.ticket-id {
+  height: 1.5rem;
+  background-color: #eeedde;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #141e27;
+  margin-left: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+.task-area {
+  height: 5rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  font-size: 1.25rem;
+  overflow: auto;
+  outline: none;
+  word-break: break-all;
+}
+
+.lock-unlock {
+  font-size: 1.5rem;
+  margin-left: 14.5rem;
+}
