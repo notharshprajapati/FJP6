@@ -1,0 +1,1 @@
+{"name":"Local: list","url":"/home/zorin/Desktop/FJP 6/DSA/list.java","tests":[{"id":1653316277362,"input":"5\n1 2 3 2 1","output":"true"},{"id":1653327263534,"input":"5\n1 2 2 3 1","output":"false"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/zorin/Desktop/FJP 6/DSA/list.java","group":"local","local":true}
